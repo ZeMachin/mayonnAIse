@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { GraphqlService } from './services/graphql.service';
 
 @Component({
@@ -7,15 +8,28 @@ import { GraphqlService } from './services/graphql.service';
   styleUrls: ['./app.component.less'],
 })
 export class AppComponent implements OnInit {
-  constructor(private _graphqlService: GraphqlService) {}
+  form: FormGroup = new FormGroup({});
+
+  constructor(private _fb: FormBuilder,
+     private _graphqlService: GraphqlService) {}
 
   ngOnInit(): void {
-    this.retrieveTitle();
+    this.createForm();
   }
 
-  async retrieveTitle() {
-    this.title = await this._graphqlService.name;
+  createForm() {
+    this.form = this._fb.group({
+      query: ['']
+    })
   }
 
-  title = 'before title';
+  async sendQuery() {
+    this.result = await this.getFromGraphQL(this.form.get('query')?.value)
+  }
+
+  async getFromGraphQL(query: string) {
+    return await this._graphqlService.query(query);
+  }
+
+  result = 'Type a query!';
 }
