@@ -5,7 +5,7 @@ import { makeExecutableSchema } from '@graphql-tools/schema'
 import { root } from './index.js';
 
 const app = express();
-const PORT = 4000;
+const PORT = 4001;
 
 // In-memory data store
 const data = {
@@ -43,10 +43,15 @@ app.use('/graphql', graphqlHTTP({
   graphiql: true,
 }));
 
+app.use('/db', (req, res, next) => {
+  console.log("req.body:", req.body);
+  res.send({data: 'message back from db to sender'})
+});
+
 
 app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
 app.listen(PORT);
-console.log('Running a GraphQL API server at http://localhost:4000/graphql');
+console.log(`Running a GraphQL API server at http://localhost:${PORT}/graphql'`);
