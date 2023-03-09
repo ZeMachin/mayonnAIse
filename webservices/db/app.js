@@ -2,10 +2,16 @@ import express from 'express';
 import cors from 'cors'
 import { graphqlHTTP } from 'express-graphql';
 import { makeExecutableSchema } from '@graphql-tools/schema'
+import bodyParser from 'body-parser';
 import { root } from './index.js';
 
 const app = express();
 const PORT = 4001;
+
+app.use(cors())
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
+app.use(bodyParser.json())
 
 // In-memory data store
 const data = {
@@ -47,11 +53,6 @@ app.use('/db', (req, res, next) => {
   console.log("req.body:", req.body);
   res.send({data: 'message back from db to sender'})
 });
-
-
-app.use(cors())
-app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
 
 app.listen(PORT);
 console.log(`Running a GraphQL API server at http://localhost:${PORT}/graphql'`);
