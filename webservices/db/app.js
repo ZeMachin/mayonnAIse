@@ -1,24 +1,12 @@
-import express from 'express';
-import cors from 'cors'
-import { graphqlHTTP } from 'express-graphql';
-import { makeExecutableSchema } from '@graphql-tools/schema'
-import bodyParser from 'body-parser';
-import { root } from './index.js';
+import express from "express";
+import cors from "cors";
+import { graphql, buildSchema } from "graphql";
 
 const app = express();
 const PORT = 4001;
 
-app.use(cors())
-app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
-app.use(bodyParser.json())
-
-// In-memory data store
-const data = {
-  whatami: "An application?",
-  whatsmyname: "MayonnAIse!",
-  something: "Something"
-}
+app.use(cors());
+app.use(express.urlencoded({ extended: true }));
 
 // Schema
 const typeDefs = `
@@ -26,33 +14,29 @@ type Query {
   whatami: String,
   whatsmyname: String,
   something: String
-}`
+}`;
 
-// Resolver for warriors
-const resolvers = {
-  Query: {
-    whatami: (obj, args, context) => context.whatami,
-    whatsmyname: (obj, args, context) => context.whatsmyname,
-    something: (obj, args, context) => context.something,
-  },
-}
+const resolverRoot = {
+  whatami: () => "An application?",
+  whatsmyname: () => "MayonnAIse!",
+  something: () => "Something",
+};
 
-const executableSchema = makeExecutableSchema({
-  typeDefs,
-  resolvers,
-})
+const schema = buildSchema(`
+type Query {
+  whatami: String,
+  whatsmyname: String,
+  something: String
+}`);
 
-app.use('/graphql', graphqlHTTP({
-  schema: executableSchema,
-  // rootValue: root,
-  context: data,
-  graphiql: true,
-}));
-
-app.use('/db', (req, res, next) => {
-  console.log("req.body:", req.body);
-  res.send({data: 'message back from db to sender'})
+app.use("/db", (req, res, next) => {
+  let query = req.body.query;
+  graphql(schema, query, resolverRoot).then((response) => {
+    res.send(response);
+  });
 });
 
 app.listen(PORT);
-console.log(`Running a GraphQL API server at http://localhost:${PORT}/graphql'`);
+console.log(
+  `Running a GraphQL API server at http://localhost:${PORT}/graphql'`
+);
