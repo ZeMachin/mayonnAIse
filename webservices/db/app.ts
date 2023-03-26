@@ -51,19 +51,20 @@ type Sales {
 }`);
 
 class Item {
-  constructor({type}) {
+  constructor({type}: {type: string}) {
     this.type = type;
   }
 
-  type
+  type: string
 
-  sales({year}) {
-    return new Sales({year, type})
+  sales({year}: {year: number}) {
+    const type = this.type;
+    return new Sales({year, type});
   }
 }
 
 class Sales {
-  constructor()
+  constructor({year, type}: {year: number, type: string}) {}
 }
 
 // app.use("/db", (req, res, next) => {
