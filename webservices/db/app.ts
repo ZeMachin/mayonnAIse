@@ -53,17 +53,17 @@ class Item {
 class Sales {
   constructor({year, type}: {year: number, type: string}) {}
 
-  january: number = 1
-  february: number = 2
-  march: number = 3
+  january: number = 2
+  february: number = 3
+  march: number = 1
   april: number = 4
   may: number = 5
   june: number = 6
   july: number = 7
-  august: number = 8
-  september: number = 9
+  august: number = 11
+  september: number = 8
   october: number = 10
-  november: number = 11
+  november: number = 9
   december: number = 12
 }
 

@@ -9,7 +9,7 @@ export class InterpreterService {
 
   constructor(private _http: HttpClient) { }
 
-  query(query: string): Promise<string> {
+  query(query: string): Promise<any> {
     const url = '/api/interpreter';
     const body: string = JSON.stringify({ query: query });
     const headers: HttpHeaders = new HttpHeaders({
@@ -19,6 +19,8 @@ export class InterpreterService {
     const options = { headers };
     return firstValueFrom(
       this._http.post<{ data: any }>(url, body, options)
-    ).then((result) => JSON.stringify(result));
+    )
+    .then((result) => result.data);
+    // .then((result) => JSON.stringify(result));
   }
 }
