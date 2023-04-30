@@ -3,16 +3,38 @@ import needle from "needle";
 
 const interpreter = async (req: Request, res: Response, next: NextFunction) => {
     console.log('interpreter()');
-    let query = req.body.query; // vente de tshirt 2022
+    // let query = req.body.query; // vente de tshirt 2022
+    // console.log('query:', query)
   
-    let itemName = 'tshirt';
-    let action = 'sales';
-    let period = '2022';
+    const itemName = 'tshirt';
+    const action = 'sales';
+    const period = '2022';
+
+    const query = `{
+      ${itemName} {
+        ${action}${(period ? `(year: ${period})` : '')} {
+          january
+          february
+          march
+          april
+          may
+          june
+          july
+          august
+          september
+          october
+          november
+          december
+        }
+      }
+    }`
   
-    let data = {query: '{' + query + '}'};
+    const data = {query: query};
   
     needle.post('http://localhost:4001/db', data, (error, response, body) => {
-      res.send({data: body.data[query]})
+      console.log('response:', response.body)
+      if(body?.data) res.send({data: body.data})
+      else res.send('error')
     })
 }
 

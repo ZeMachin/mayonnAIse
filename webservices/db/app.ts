@@ -9,19 +9,6 @@ const PORT = 4001;
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 
-// const root = {
-//   whatami: () => "An application?",
-//   whatsmyname: () => "MayonnAIse!",
-//   something: () => "Something",
-// };
-
-// const schema = buildSchema(`
-// type Query {
-//   whatami: String,
-//   whatsmyname: String,
-//   something: String
-// }`);
-
 const root = {
   tshirt: () => new Item({type: 'tshirt'})
 };
@@ -58,21 +45,27 @@ class Item {
   type: string
 
   sales({year}: {year: number}) {
-    const type = this.type;
+    const type = this.type!;
     return new Sales({year, type});
   }
 }
 
 class Sales {
   constructor({year, type}: {year: number, type: string}) {}
-}
 
-// app.use("/db", (req, res, next) => {
-//   let query = req.body.query;
-//   graphql(schema, query, root).then((response) => {
-//     res.send(response);
-//   });
-// });
+  january: number = 1
+  february: number = 2
+  march: number = 3
+  april: number = 4
+  may: number = 5
+  june: number = 6
+  july: number = 7
+  august: number = 8
+  september: number = 9
+  october: number = 10
+  november: number = 11
+  december: number = 12
+}
 
 app.use("/db", graphqlHTTP({
   schema: schema,
