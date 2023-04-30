@@ -1,14 +1,18 @@
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { GraphqlService } from './services/graphql/graphql.service';
 import { InterpreterService } from './services/interpreter/interpreter.service';
+import { GraphComponent } from './graph/graph.component';
+import { HomeComponent } from './home/home.component';
 
-const routes: Routes = [];
+const routes: Routes = [
+  { path: 'home', component: HomeComponent },
+  { path: 'graph', component: GraphComponent}
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes), HttpClientModule],
   exports: [RouterModule],
-  providers: [GraphqlService, InterpreterService]
+  providers: [InterpreterService]
 })
 export class AppRoutingModule { }

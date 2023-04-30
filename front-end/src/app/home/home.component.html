@@ -1,0 +1,12 @@
+<body>
+    <div class="container">
+        <form [formGroup]="form">
+            <mat-form-field appearance="fill">
+                <mat-label>Query</mat-label>
+                <input matInput formControlName="query" />
+            </mat-form-field>
+            <button mat-raised-button (click)="sendQuery()">Send Query</button>
+        </form>
+        {{ result }}
+    </div>
+</body>

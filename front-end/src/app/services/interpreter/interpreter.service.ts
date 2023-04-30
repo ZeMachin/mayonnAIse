@@ -11,7 +11,6 @@ export class InterpreterService {
 
   query(query: string): Promise<string> {
     const url = '/api/interpreter';
-    // const body: string = JSON.stringify({ query: '{' + query + '}' });
     const body: string = JSON.stringify({ query: query });
     const headers: HttpHeaders = new HttpHeaders({
       'Content-Type': 'application/json',
