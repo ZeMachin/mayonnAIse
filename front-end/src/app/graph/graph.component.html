@@ -1,2 +1,6 @@
 <h2>{{title}}</h2>
 <app-bar-chart *ngIf="chart == allChartTypes.barChart" [data]="data" [property]="property"></app-bar-chart>
+<app-timeline *ngIf="chart == allChartTypes.timeline" [data]="data" [property]="property"></app-timeline>
+<app-pie-chart *ngIf="chart == allChartTypes.pieChart" [data]="data" [property]="property"></app-pie-chart>
+<app-linear-histogram *ngIf="chart == allChartTypes.linearHistogram" [data]="data" [property]="property"></app-linear-histogram>
+<app-logarithmic-histogram *ngIf="chart == allChartTypes.logarithmicHistogram" [data]="data" [property]="property"></app-logarithmic-histogram>
