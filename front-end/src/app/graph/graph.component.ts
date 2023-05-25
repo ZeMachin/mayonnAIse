@@ -9,7 +9,7 @@ import { Category, CategoryProperty, ChartType } from 'src/model/category.model'
 })
 export class GraphComponent implements OnInit {
   title?: string;
-  category?: Category;
+  category!: Category;
   property!: CategoryProperty;
   data: any = {};
   chart?: ChartType;
@@ -28,7 +28,7 @@ export class GraphComponent implements OnInit {
       this.category = history.state['data'].category;
       this.property = history.state['data'].property;
       this.data = history.state['data'].data[this.category!.root][this.category!.firstNode];
-      // console.log('data:', this.data);
+      console.log('data:', this.data);
       // console.log('title:', this.title);
       // console.log('chart:', this.chart);
       // console.log('category:', this.category);

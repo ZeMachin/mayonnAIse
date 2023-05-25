@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { CategoryProperty } from 'src/model/category.model';
+import { Category, CategoryProperty } from 'src/model/category.model';
 
 import * as d3 from 'd3';
 
@@ -9,6 +9,7 @@ import * as d3 from 'd3';
   styleUrls: ['./bar-chart.component.less']
 })
 export class BarChartComponent implements OnInit {
+  @Input() category!: Category;
   @Input() property!: CategoryProperty;
   @Input() data!: any;
 
@@ -27,8 +28,15 @@ export class BarChartComponent implements OnInit {
   }
 
   private drawBarChart() {
-    this.keys = [...new Set<string>(this.data.map((element: any) => element[this.property!.request ?? this.property!.name]))].filter((v) => !!v).sort(); // Gets an array of property values without repeated value, sorted and without null value
-    this.values = this.keys.map((key) => this.data.filter((element: any) => element[this.property!.request ?? this.property!.name] === key).length) // Gets the array size of the number of element matching each property (count)
+    console.log('data:',this.data)
+    if(!this.property.isCount) {
+      this.keys = [...new Set<string>(this.data.map((element: any) => element[this.property!.name]))].filter((v) => !!v).sort(); // Gets an array of property values without repeated value, sorted and without null value
+      this.values = this.keys.map((key) => this.data.filter((element: any) => element[this.property!.name] === key).length) // Gets the array size of the number of element matching each property (count)
+    }
+    else {
+      this.keys = (this.data.map((element: any) => element[this.category.firstNode === 'films' ? 'title' : 'name'])); 
+      this.values = this.data.map((element: any) => element[this.property!.name]['totalCount'])
+    }
     console.log('keys:', this.keys);
     console.log('values:', this.values);
     this.d = this.keys.map((k, i) => { return { label: k, value: this.values[i] } })

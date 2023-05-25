@@ -4,29 +4,34 @@ export const CATEGORIES: Category[] = [{
     root: 'allFilms',
     firstNode: 'films',
     properties: [{
-      name: 'charactersCount',
+      name: 'characterConnection',
       request: 'characterConnection  { totalCount } ',
-      chart: ChartType.barChart
+      chart: ChartType.barChart,
+      isCount: true
     },
     {
-      name: 'planetsCount',
+      name: 'planetConnection',
       request: 'planetConnection  { totalCount }',
-      chart: ChartType.barChart
+      chart: ChartType.barChart,
+      isCount: true
     },
     {
-      name: 'speciesCount',
+      name: 'speciesConnection',
       request: 'speciesConnection  { totalCount }',
-      chart: ChartType.barChart
+      chart: ChartType.barChart,
+      isCount: true
     },
     {
-      name: 'starshipsCount',
+      name: 'starshipConnection',
       request: 'starshipConnection  { totalCount }',
-      chart: ChartType.barChart
+      chart: ChartType.barChart,
+      isCount: true
     },
     {
-      name: 'vehiclesCount',
+      name: 'vehicleConnection',
       request: 'vehicleConnection  { totalCount }',
-      chart: ChartType.barChart
+      chart: ChartType.barChart,
+      isCount: true
     },
     {
       name: 'releaseDate',
@@ -98,19 +103,22 @@ export const CATEGORIES: Category[] = [{
         chart: ChartType.barChart
       },
       {
-        name: 'filmsCount',
+        name: 'filmConnection',
         request: 'filmConnection  { totalCount }',
-        chart: ChartType.barChart
+        chart: ChartType.barChart,
+        isCount: true
       },
       {
-        name: 'starshipsCount',
+        name: 'starshipConnection',
         request: 'starshipConnection  { totalCount }',
-        chart: ChartType.barChart
+        chart: ChartType.barChart,
+        isCount: true
       },
       {
-        name: 'vehiclesCount',
+        name: 'vehicleConnection',
         request: 'vehicleConnection  { totalCount }',
-        chart: ChartType.barChart
+        chart: ChartType.barChart,
+        isCount: true
       },]
   }, {
     root: 'allPlanets',
@@ -157,14 +165,16 @@ export const CATEGORIES: Category[] = [{
           chart: ChartType.barChart
         },
         {
-          name: 'residentsCount',
+          name: 'residentConnection',
           request: 'residentConnection  { totalCount }',
-          chart: ChartType.barChart
+          chart: ChartType.barChart,
+          isCount: true
         },
         {
-          name: 'filmsCount',
+          name: 'filmConnection',
           request: 'filmConnection  { totalCount }',
-          chart: ChartType.barChart
+          chart: ChartType.barChart,
+          isCount: true
         },]
   }, {
     root: 'allSpecies',
@@ -206,9 +216,10 @@ export const CATEGORIES: Category[] = [{
           chart: ChartType.barChart
         },
         {
-          name: 'filmsCount',
+          name: 'filmConnection',
           request: 'filmConnection  { totalCount }',
-          chart: ChartType.barChart
+          chart: ChartType.barChart,
+          isCount: true
         },]
   }, {
     root: 'allStarships',
@@ -260,9 +271,10 @@ export const CATEGORIES: Category[] = [{
           chart: ChartType.barChart
         },
         {
-          name: 'filmsCount',
+          name: 'filmConnection',
           request: 'filmConnection  { totalCount }',
-          chart: ChartType.barChart
+          chart: ChartType.barChart,
+          isCount: true
         },]
   }, {
     root: 'allVehicles',
@@ -309,9 +321,10 @@ export const CATEGORIES: Category[] = [{
           chart: ChartType.barChart
         },
         {
-          name: 'filmsCount',
+          name: 'filmConnection',
           request: 'filmConnection  { totalCount }',
-          chart: ChartType.barChart
+          chart: ChartType.barChart,
+          isCount: true
         },]
   },]
   

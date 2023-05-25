@@ -8,6 +8,7 @@ export interface Category {
     name: string;
     request?: string;
     chart: ChartType;
+    isCount?: boolean;
   }
   
   export enum ChartType {
