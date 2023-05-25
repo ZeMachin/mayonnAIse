@@ -20,7 +20,7 @@ export class InterpreterService {
     return firstValueFrom(
       this._http.post<{ data: any }>(url, body, options)
     )
-    .then((result) => result.data);
+    .then((result) => result);
     // .then((result) => JSON.stringify(result));
   }
 }

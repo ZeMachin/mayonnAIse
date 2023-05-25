@@ -5,18 +5,19 @@ import { CATEGORIES } from './data/categories';
 
 const interpreter = async (req: Request, res: Response, next: NextFunction) => {
   console.log('interpreter()');
-  // let query = req.body.query;
-  // console.log('query:', query)
+  console.log('query:', req.body.query)
 
-  const chosenCategory: Category = pickCategory();
-  const chosenProperty: CategoryProperty = pickProperty(chosenCategory);
+  const pickedData = req.body.query.split(' ');
+
+  const chosenCategory: Category = pickCategory(parseInt(pickedData[0]));
+  const chosenProperty: CategoryProperty = pickProperty(chosenCategory, parseInt(pickedData[1]));
 
   const query = `
       query Query {
         ${chosenCategory.root} {
           ${chosenCategory.firstNode} {
             ${chosenCategory.firstNode === 'films' ? 'title' : 'name'}
-            ${chosenProperty.name}
+            ${chosenProperty.request}
           }
         }
       }
@@ -26,19 +27,18 @@ const interpreter = async (req: Request, res: Response, next: NextFunction) => {
 
   needle.post('https://swapi-graphql.netlify.app/.netlify/functions/index', data, (error, response, body) => {
     console.log('response:', response.body)
-    if (body?.data) res.send({ data: body.data })
+    // if (body?.data) res.send({ data: body.data, chart: chosenProperty.chart, title: req.body.query })
+    if (body?.data) res.send({ data: body.data, chart: chosenProperty.chart, title: `${chosenCategory.firstNode} ${chosenProperty.name}`, category: chosenCategory, property: chosenProperty  })
     else res.send('error')
   })
 }
 
-const pickCategory = (): Category => {
-  const randomIndex = Math.floor(Math.random() * CATEGORIES.length);
-  return CATEGORIES[randomIndex];
+const pickCategory = (idx?: number): Category => {
+  return CATEGORIES[idx ?? Math.floor(Math.random() * CATEGORIES.length)];
 }
 
-const pickProperty = (category: Category): CategoryProperty => {
-  const randomIndex = Math.floor(Math.random() * category.properties.length);
-  return category.properties[randomIndex];
+const pickProperty = (category: Category, idx?: number): CategoryProperty => {
+  return category.properties[idx ?? Math.floor(Math.random() * category.properties.length)];
 }
 
 export default { interpreter }

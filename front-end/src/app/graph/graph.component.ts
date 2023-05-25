@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import * as d3 from 'd3';
+import { Category, CategoryProperty } from 'src/model/category.model';
 
 @Component({
   selector: 'app-graph',
@@ -10,7 +11,12 @@ import * as d3 from 'd3';
 export class GraphComponent implements OnInit {
   item: string = '';
   action: string = '';
+  title?: string;
+  category?: Category;
+  property?: CategoryProperty;
+
   private data: any = {};
+  private chart?: string;
 
   private keys: string[] = [];
   private values: number[] = [];
@@ -26,17 +32,28 @@ export class GraphComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.data = history.state['data'];
-    if(!this.data) this._router.navigate(['/home']);
+    if (!history.state['data']) this._router.navigate(['/home']);
     else {
-      this.item = Object.keys(this.data)[0];
-      this.action = Object.keys(this.data[this.item])[0];
-      this.keys = Object.keys(this.data[this.item][this.action]);
-      this.values = Object.values(this.data[this.item][this.action]);
-      this.d = this.keys.map((k, i) => { return { month: k, value: this.values[i] } })
-      this.createSvg();
-      this.drawBars();
+      this.title = history.state['data'].title;
+      this.chart = history.state['data'].chart;
+      this.category = history.state['data'].category;
+      this.property = history.state['data'].property;
+      this.data = history.state['data'].data[this.category!.root][this.category!.firstNode];
+      // console.log('data:', this.data);
+      // console.log('title:', this.title);
+      // console.log('chart:', this.chart);
+      this.drawBarChart();
     }
+  }
+
+  private drawBarChart() {
+    this.keys = [...new Set<string>(this.data.map((element: any) => element[this.property!.request ?? this.property!.name]))].filter((v) => !!v).sort(); // Gets an array of property values without repeated value, sorted and without null value
+    this.values = this.keys.map((key) => this.data.filter((element: any) => element[this.property!.request ?? this.property!.name] === key).length) // Gets the array size of the number of element matching each property (count)
+    // console.log('keys:', this.keys);
+    // console.log('values:', this.values);
+    this.d = this.keys.map((k, i) => { return { month: k, value: this.values[i] } })
+    this.createSvg();
+    this.drawBars();
   }
 
   private createSvg(): void {
