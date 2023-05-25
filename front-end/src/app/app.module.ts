@@ -8,9 +8,10 @@ import { AppComponent } from './app.component';
 import { MaterialModule } from './material.module';
 import { GraphComponent } from './graph/graph.component';
 import { HomeComponent } from './home/home.component';
+import { BarChartComponent } from './graph/bar-chart/bar-chart.component';
 
 @NgModule({
-  declarations: [AppComponent, GraphComponent, HomeComponent],
+  declarations: [AppComponent, GraphComponent, HomeComponent, BarChartComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
