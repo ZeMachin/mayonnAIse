@@ -17,6 +17,7 @@ export class HomeComponent {
 
   ngOnInit(): void {
     this.createForm();
+    this.sendQuery('1 4');
   }
 
   createForm() {
@@ -25,8 +26,9 @@ export class HomeComponent {
     })
   }
 
-  async sendQuery() {
-    this.result = await this.getFromInterpreter(this.form.get('query')?.value);
+  async sendQuery(testQuery?: string) {
+    const query: string = testQuery ?? this.form.get('query')?.value;
+    this.result = await this.getFromInterpreter(query);
     this._router.navigate(['/graph'], { state: { data: this.result }});
   }
 
