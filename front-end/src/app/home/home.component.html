@@ -8,5 +8,20 @@
             <button mat-raised-button (click)="sendQuery()">Send Query</button>
         </form>
         {{ result }}
+
+
+        <!-- <h4>Select a property for a graph</h4> -->
+        <mat-form-field>
+            <mat-label>Property</mat-label>
+            <mat-select (selectionChange)="onSelectChange($event)">
+                <mat-optgroup *ngFor="let category of categories; let i = index" [label]="category.firstNode">
+                    <mat-option *ngFor="let property of category.properties; let j = index" [value]="i.toString() + ' ' + j.toString()">
+                        {{property.name}}
+                        {{allCharts[property.chart]}}
+                        <hr>
+                    </mat-option>
+                </mat-optgroup>
+            </mat-select>
+        </mat-form-field>
     </div>
 </body>

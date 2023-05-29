@@ -1,4 +1,5 @@
 <h2>{{title}}</h2>
+<h2>{{query}}</h2>
 <app-bar-chart *ngIf="chart == allChartTypes.barChart" [data]="data" [property]="property" [category]="category"></app-bar-chart>
 <app-timeline *ngIf="chart == allChartTypes.timeline" [data]="data" [property]="property"></app-timeline>
 <app-pie-chart *ngIf="chart == allChartTypes.pieChart" [data]="data" [property]="property"></app-pie-chart>

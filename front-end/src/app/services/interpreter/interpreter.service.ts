@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { firstValueFrom } from 'rxjs';
+import { DTO } from 'src/model/dto.model';
 
 @Injectable({
   providedIn: 'root'
@@ -18,9 +19,8 @@ export class InterpreterService {
     });
     const options = { headers };
     return firstValueFrom(
-      this._http.post<{ data: any }>(url, body, options)
+      this._http.post<DTO>(url, body, options)
     )
     .then((result) => result);
-    // .then((result) => JSON.stringify(result));
   }
 }

@@ -2,6 +2,10 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { InterpreterService } from '../services/interpreter/interpreter.service';
+import { CategoryProperty } from 'src/model/category.model';
+import { CATEGORIES } from '../data/categories';
+import { MatSelectChange } from '@angular/material/select';
+import { ChartType } from 'src/model/category.model';
 
 @Component({
   selector: 'app-home',
@@ -10,6 +14,9 @@ import { InterpreterService } from '../services/interpreter/interpreter.service'
 })
 export class HomeComponent {
   form: FormGroup = new FormGroup({});
+  selectedProperty?: CategoryProperty;
+  categories = CATEGORIES;
+  allCharts = ChartType;
 
   constructor(private _fb: FormBuilder,
      private _interpreterService: InterpreterService,
@@ -17,7 +24,12 @@ export class HomeComponent {
 
   ngOnInit(): void {
     this.createForm();
-    this.sendQuery('1 4');
+    // this.sendQuery('1 4'); // for test purposes
+  }
+
+  onSelectChange(event: MatSelectChange) {
+    console.log('event:', event);
+    this.sendQuery(event.value);
   }
 
   createForm() {

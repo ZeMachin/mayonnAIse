@@ -1,4 +1,5 @@
-import { Category, ChartType } from "../model/category.model";
+import { Category, ChartType } from "src/model/category.model";
+
 
 export const CATEGORIES: Category[] = [{
     root: 'allFilms',
