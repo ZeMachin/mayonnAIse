@@ -6,6 +6,10 @@ router.post("/api/interpreter", (req, res, next) =>
     controller.interpreter(req, res, next)
 );
 
+router.get("/api/interpreter/test", (req, res, next) =>
+    controller.test(req, res, next)
+);
+
 router.get("*", (req, res, next) => {
     console.log('connection attempt')
     console.log('url:', req.originalUrl)

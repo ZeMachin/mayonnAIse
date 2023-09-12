@@ -4,6 +4,7 @@ import util from "util"
 import { Category, CategoryProperty } from './model/category.model';
 import { CATEGORIES } from './data/categories';
 import { DTO } from './model/dto.model';
+import * as tf from './tensorflow/tf';
 
 const interpreter = async (req: Request, res: Response, next: NextFunction) => {
   try {
@@ -53,4 +54,9 @@ const pickProperty = (category: Category, idx?: number): CategoryProperty => {
   return category.properties[idx ?? Math.floor(Math.random() * category.properties.length)];
 }
 
-export default { interpreter }
+const test = async (req: Request, res: Response, next: NextFunction) => {
+  await tf.test();
+  res.send('it worked =)');
+}
+
+export default { interpreter, test }

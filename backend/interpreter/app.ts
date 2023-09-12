@@ -25,4 +25,4 @@ router.use(express.urlencoded({ extended: true }));
 router.use('/', routes);
 
 router.listen(PORT);
-console.log(`Running interpreter.ts at https://mayonnaise-ws.onrender.com:${PORT}/interpreter'`);
+console.log(`Running interpreter.ts on port ${PORT}`);
