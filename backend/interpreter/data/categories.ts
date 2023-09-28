@@ -1,6 +1,7 @@
 import { Category, ChartType } from "../model/category.model";
 
 export const CATEGORIES: Category[] = [{
+  name: 'films',
     root: 'allFilms',
     firstNode: 'films',
     properties: [{
@@ -49,6 +50,7 @@ export const CATEGORIES: Category[] = [{
       chart: ChartType.barChart
     },]
   }, {
+    name: 'people',
     root: 'allPeople',
     firstNode: 'people',
     properties: [
@@ -116,6 +118,7 @@ export const CATEGORIES: Category[] = [{
         isCount: true
       },]
   }, {
+    name: 'planets',
     root: 'allPlanets',
     firstNode: 'planets',
     properties: [
@@ -172,6 +175,7 @@ export const CATEGORIES: Category[] = [{
           isCount: true
         },]
   }, {
+    name: 'species',
     root: 'allSpecies',
     firstNode: 'species',
     properties: [
@@ -217,6 +221,7 @@ export const CATEGORIES: Category[] = [{
           isCount: true
         },]
   }, {
+    name: 'starships',
     root: 'allStarships',
     firstNode: 'starships',
     properties: [
@@ -272,6 +277,7 @@ export const CATEGORIES: Category[] = [{
           isCount: true
         },]
   }, {
+    name: 'vehicles',
     root: 'allVehicles',
     firstNode: 'vehicles',
     properties: [
