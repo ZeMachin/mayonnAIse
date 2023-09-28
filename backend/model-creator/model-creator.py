@@ -56,4 +56,4 @@ export_model.compile(
     loss=losses.BinaryCrossentropy(from_logits=False), optimizer="adam", metrics=['accuracy']
 )
 
-export_model.save(os.path.join('models', model_type, 'model.keras'))
+export_model.save(os.path.join(model_type, 'model.keras'))
