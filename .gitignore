@@ -1,0 +1,2 @@
+backend/tensorflow_ws/aclImdb/*
+*.tar.gz
