@@ -1,0 +1,31 @@
+{
+  "type": "commonjs",
+  "scripts": {
+    "build": "tsc",
+    "start": "node ./dist/app.js",
+    "start-ts": "npx ts-node app.ts"
+  },
+  "dependencies": {
+    "@tensorflow/tfjs": "^4.22.0",
+    "@tensorflow/tfjs-node": "^4.22.0",
+    "@tensorflow/tfjs-node-gpu": "^4.22.0",
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "graphql": "^16.10.0",
+    "i": "^0.3.7",
+    "needle": "^3.3.1",
+    "npm": "^11.0.0",
+    "path": "^0.12.7",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.3"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.0",
+    "@types/needle": "^3.3.0"
+  },
+  "exec_mode": "cluster",
+  "engines": {
+    "node": "18.x"
+  }
+}

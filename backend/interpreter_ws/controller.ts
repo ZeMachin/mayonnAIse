@@ -13,8 +13,8 @@ const interpreter = async (req: Request, res: Response, next: NextFunction) => {
   
     const originalQuery: string = req.body.query;
   
-    const chosenCategory: Category = predictCategory(originalQuery);
-    const chosenProperty: CategoryProperty = predictProperty(chosenCategory, originalQuery);
+    const chosenCategory: Category = await predictCategory(originalQuery);
+    const chosenProperty: CategoryProperty = await predictProperty(chosenCategory, originalQuery);
   
     const query = `
         query Query {
@@ -43,12 +43,12 @@ const interpreter = async (req: Request, res: Response, next: NextFunction) => {
   }
 }
 
-const predictCategory = (query: string): Category => {
-  return tf.predictCategory(query);
+const predictCategory = async (query: string): Promise<Category> => {
+  return await tf.predictCategory(query);
 }
 
-const predictProperty = (category: Category, query: string): CategoryProperty => {
-  return tf.predictProperty(category, query);
+const predictProperty = async (category: Category, query: string): Promise<CategoryProperty> => {
+  return await tf.predictProperty(category, query);
 }
 
 const test = async (req: Request, res: Response, next: NextFunction) => {
